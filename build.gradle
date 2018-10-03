@@ -1,0 +1,45 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.5.RELEASE")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+bootJar {
+    baseName = 'library-scanner'
+    version =  '0.1.0'
+}
+
+repositories {
+    mavenCentral()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+    compile 'commons-io:commons-io:2.6'
+    compile 'log4j:log4j:1.2.17'
+
+    compile 'org.jdom:jdom:2.0.2'
+    compile 'org.springframework.boot:spring-boot-starter-web'
+    compile 'org.projectlombok:lombok:1.18.2'
+    compile 'org.apache.maven.shared:maven-invoker:3.0.1'
+    compile 'org.apache.maven:maven-model:3.5.4'
+    compile 'org.eclipse.jgit:org.eclipse.jgit:5.1.1.201809181055-r'
+    compile 'org.w3c:dom:2.3.0-jaxb-1.0.6'
+
+    compileOnly "org.springframework.boot:spring-boot-configuration-processor"
+
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
+    testCompile 'com.jayway.jsonpath:json-path'
+}
+

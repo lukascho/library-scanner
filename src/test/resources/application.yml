@@ -1,0 +1,3 @@
+git:
+  directory: "/Users/lukas/Tmp"
+  sshKey: /Users/lukas/.ssh/id_rsa
