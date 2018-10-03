@@ -16,7 +16,7 @@ import static org.junit.Assert.*;
 
 public class MvnPomHandlerTest {
 
-    private static final String POM = "pom.xml";
+    private static final String POM = "example-project/pom.xml";
 
     private MvnPomHandler mvnPomHandler;
 
