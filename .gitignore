@@ -3,3 +3,4 @@
 /out/
 /library-scanner.iml
 .DS_Store
+*.db
