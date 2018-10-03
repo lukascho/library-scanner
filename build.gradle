@@ -28,18 +28,20 @@ targetCompatibility = 1.8
 dependencies {
     compile 'commons-io:commons-io:2.6'
     compile 'log4j:log4j:1.2.17'
-
     compile 'org.jdom:jdom:2.0.2'
+    compile 'org.springframework.boot:spring-boot-starter-actuator'
     compile 'org.springframework.boot:spring-boot-starter-web'
+    compile 'org.springframework.boot:spring-boot-starter-data-jpa:2.0.5.RELEASE'
     compile 'org.projectlombok:lombok:1.18.2'
     compile 'org.apache.maven.shared:maven-invoker:3.0.1'
     compile 'org.apache.maven:maven-model:3.5.4'
     compile 'org.eclipse.jgit:org.eclipse.jgit:5.1.1.201809181055-r'
     compile 'org.w3c:dom:2.3.0-jaxb-1.0.6'
+    compile 'com.h2database:h2:1.4.197'
+    compile 'org.springframework.boot:spring-boot-starter-test'
+    compile 'com.jayway.jsonpath:json-path'
 
     compileOnly "org.springframework.boot:spring-boot-configuration-processor"
 
-    testCompile 'org.springframework.boot:spring-boot-starter-test'
-    testCompile 'com.jayway.jsonpath:json-path'
 }
 

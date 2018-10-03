@@ -11,5 +11,10 @@ public interface GitService {
      */
     boolean cloneRepo(final String gitUri);
 
+    /**
+     * clears git base directory
+     *
+     * @return true if directory exists else false
+     */
     boolean clearDirectory();
 }

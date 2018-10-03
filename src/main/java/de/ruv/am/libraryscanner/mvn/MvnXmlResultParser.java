@@ -2,6 +2,7 @@ package de.ruv.am.libraryscanner.mvn;
 
 import de.ruv.am.libraryscanner.domain.api.Artifact;
 import de.ruv.am.libraryscanner.domain.api.Dependency;
+import de.ruv.am.libraryscanner.domain.api.Version;
 import de.ruv.am.libraryscanner.domain.mvn.MvnVersionsResult;
 import de.ruv.am.libraryscanner.domain.mvn.MvnVersionsSummary;
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +27,6 @@ public class MvnXmlResultParser {
      * parse dependency information from given maven dependency report
      *
      * @param reportPath file path to dependency report
-     *
      * @return list of dependency information
      */
     public MvnVersionsResult parseMavenDependencyReport(final String reportPath) {
@@ -75,19 +75,20 @@ public class MvnXmlResultParser {
         final String nextVersion = this.getNodeInfo(dependencyNode, "nextVersion");
         final String status = this.getNodeInfo(dependencyNode, "status");
 
-        final List<String> incrementals = getVersions(dependencyNode, "incrementals");
-        final List<String> minors = getVersions(dependencyNode, "minors");
-        final List<String> majors = getVersions(dependencyNode, "majors");
+        final List<Version> incrementals = getVersions(dependencyNode, "incrementals");
+        final List<Version> minors = getVersions(dependencyNode, "minors");
+        final List<Version> majors = getVersions(dependencyNode, "majors");
 
-        return Dependency.builder()
-                .artifact(new Artifact(groupId, artifactId))
-                .nextVersion(nextVersion)
-                .currentVersion(currentVersion)
-                .status(status)
-                .majors(majors)
-                .minors(minors)
-                .incrementals(incrementals)
-                .build();
+        final Dependency dependency = new Dependency();
+        dependency.setArtifact(new Artifact(groupId, artifactId));
+        dependency.setNextVersion(nextVersion);
+        dependency.setCurrentVersion(currentVersion);
+        dependency.setStatus(status);
+        dependency.setMajors(majors);
+        dependency.setMinors(minors);
+        dependency.setIncrementals(incrementals);
+
+        return dependency;
     }
 
     private String getNodeInfo(final Element dependencyNode, final String attribute) {
@@ -96,11 +97,11 @@ public class MvnXmlResultParser {
                 .orElse(new Element("empty")).getText();
     }
 
-    private List<String> getVersions(final Element dependencyNode, final String type) {
+    private List<Version> getVersions(final Element dependencyNode, final String type) {
         return Optional.ofNullable(dependencyNode.getChild(type)).orElse(new Element("empty"))
                 .getChildren()
                 .stream()
-                .map(Element::getText)
+                .map(element -> new Version(element.getText()))
                 .collect(Collectors.toList());
     }
 }

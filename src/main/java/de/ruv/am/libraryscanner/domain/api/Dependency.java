@@ -1,22 +1,42 @@
 package de.ruv.am.libraryscanner.domain.api;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.Builder;
-import lombok.Getter;
+import lombok.*;
 
+import javax.persistence.*;
 import java.util.List;
 
-@Builder
-@Getter
+@Data
+@Entity
+@Table
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Dependency {
 
+    @Id
+    @GeneratedValue
+    private Long id;
+
+    @OneToOne
     private Artifact artifact;
+
+    @Column
     private String currentVersion;
+
+    @Column
     private String nextVersion;
+
+    @Column
     private String status;
 
-    private List<String> incrementals;
-    private List<String> minors;
-    private List<String> majors;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Version> incrementals;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Version> minors;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Version> majors;
+
+    public Dependency() {
+    }
 }

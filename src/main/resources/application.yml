@@ -1,3 +1,16 @@
+spring:
+  h2:
+    console:
+      enabled: true
+      path: /h2
+  datasource:
+    url: jdbc:h2:file:./spring-boot-h2-db
+    driverClassName: org.h2.Driver
+  jpa:
+    hibernate:
+      naming-strategy: org.hibernate.cfg.DefaultNamingStrategy
+      ddl-auto: create-drop #update
+
 git:
   directory: "/Users/lukas/Tmp"
   sshKey: /Users/lukas/.ssh/id_rsa
