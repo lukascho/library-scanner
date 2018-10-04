@@ -1,7 +1,6 @@
 package de.ruv.am.libraryscanner.api;
 
 
-import de.ruv.am.libraryscanner.domain.api.Artifact;
 import de.ruv.am.libraryscanner.domain.api.Dependency;
 import de.ruv.am.libraryscanner.service.DependencyService;
 import lombok.AllArgsConstructor;

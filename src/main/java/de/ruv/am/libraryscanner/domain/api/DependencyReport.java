@@ -1,6 +1,8 @@
 package de.ruv.am.libraryscanner.domain.api;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import de.ruv.am.libraryscanner.domain.mvn.MvnVersionsSummary;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,7 +26,10 @@ public class DependencyReport {
     @Column
     private String source;
 
-    @OneToOne
+    @JsonManagedReference
+    @JsonIgnore
+    @JoinColumn(name = "project_id")
+    @OneToOne(fetch = FetchType.LAZY)
     private Project project;
 
     @Transient

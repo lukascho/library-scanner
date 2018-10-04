@@ -1,5 +1,6 @@
 package de.ruv.am.libraryscanner.domain.api;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
@@ -26,6 +27,11 @@ public class Project {
 
     @Column
     private String version;
+
+    @JsonBackReference
+    @OneToOne(mappedBy = "project", cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY, optional = false)
+    private DependencyReport dependencyReport;
 
     public Project(String groupId, String artifactId, String version) {
         this.groupId = groupId;

@@ -17,8 +17,8 @@ public class DependencyReportService {
     private final ProjectRepository projectRepository;
 
     public DependencyReport save(DependencyReport dependencyReport) {
-        dependencyReport.getDependencies().forEach(dependencyService::addDependency);
         projectRepository.save(dependencyReport.getProject());
+        dependencyReport.getDependencies().forEach(dependencyService::addDependency);
         return dependencyReportRepository.save(dependencyReport);
     }
 
